@@ -1,0 +1,54 @@
+# LGTM Dog Website Implementation Plan
+
+The objective is to create a website similar to [LGTMeow](https://lgtmeow.com/en), but dedicated to dogs ("LGTM-Woof" or "LGTM-Dog"). Users can generate 9 random dog images at a time, each featuring a large, stylized "LGTM" text overlay. Users can click on an image to copy its Markdown code for GitHub.
+
+Data persistence is handled by Convex, storing the processed images.
+
+## Proposed Changes
+
+### 1. Project Initialization
+- Create a new Next.js application in `d:\WebDev\lgtm-woof`.
+- Initialize Convex.
+- Install standard server-side image processing libraries (`sharp`, `satori`, `@resvg/resvg-js`).
+
+### 2. Backend & Database (Convex)
+- **Schema:** 
+  - `images`: 
+    - `storageId: v.id("_storage")` (Reference to Convex file storage)
+    - `url: v.string()` (Public URL in Convex)
+    - `breed: v.string()` (Breed name extracted from the Dog CEO API)
+    - `createdAt: v.number()`
+- **Queries & Mutations:**
+  - `getImages`: Query to fetch active generated images (can implement pagination or a random shuffle).
+  - `saveImages`: Mutation to securely store multiple image records once they are processed.
+
+### 3. Image Generation & Processing (Next.js Server Actions)
+Instead of using AI to generate the images and text, we will use a standard server-side rendering workflow:
+1. **Fetch Data:** When a user clicks "Generate Random", call `https://dog.ceo/api/breeds/image/random/9`.
+2. **Download & Process:** For each of the 9 images returned:
+   - Extract the `breed-id` from the URL.
+   - Download the raw image via `fetch()`.
+   - **Text Overlay (Dynamic & Casual):** We'll use Vercel's Satori library embedded in a Next.js API/Action.
+     - Satori will dynamically render the text "LGTM".
+     - Satori allows us to randomly select from a bundled list of casual, cool Google Fonts (e.g., *Caveat, Permanent Marker, Patrick Hand, Amatic SC*). The text will be bold and its font will be randomized for every image.
+     - `resvg-js` will convert the stylized text SVG into a PNG and `sharp` will composite it centrally over the downloaded dog background.
+3. **Upload to Convex:** Upload the final, composite image buffer to Convex Storage.
+4. **Save Metadata:** Save the Storage URL and `breed` to the Convex `images` table.
+
+### 4. Frontend Application
+- **Home Page ([app/page.tsx](file:///d:/WebDev/lgtm-woof/app/page.tsx)):**
+  - Features a "Generate Random" button that triggers the server action.
+  - Fetches and displays existing images from Convex.
+  - Features a Masonry or simple Grid layout to show off the generated LGTM dogs.
+- **Interactions:**
+  - Clicking an image copies the exact Markdown syntax requested: `[![LGTM](<convex_image_url>)](https://lgtm-woof.example.com)` (where `lgtm-woof.example.com` will be your deployment URL).
+  - A toast notification confirming the Markdown was copied.
+- **Aesthetics:**
+  - Clean, minimalist aesthetic utilizing Tailwind CSS, reminiscent of LGTMeow but customized for user-friendliness.
+
+## Verification Plan
+### Manual Verification
+1. Click the "Generate Random" button. Ensure 9 images are fetched from Dog CEO, processed, and randomly stylized with a casual font for the "LGTM" text.
+2. Verify images are reliably saved to Convex.
+3. Verify images are rendered accurately with the `breed-id` tag visible on the UI.
+4. Click on a processed image and paste the clipboard content to verify the Markdown format is properly structured for pasting into GitHub PRs or comments.
