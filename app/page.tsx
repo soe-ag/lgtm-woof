@@ -7,6 +7,7 @@ import { generateLgtmImages } from './actions/generate'
 import { toast } from 'sonner'
 import { Loader2, Copy, Images } from 'lucide-react'
 import Link from 'next/link'
+import { Footer } from '@/components/Footer'
 
 export default function Home() {
   const images = useQuery(api.images.getLatestBatch)
@@ -74,7 +75,7 @@ export default function Home() {
       <main className="container mx-auto max-w-7xl px-4 py-8">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-zinc-900 dark:text-white mb-4">
-            A service for sharing cute <span className="text-amber-500">dog LGTM</span> images.
+            Spice up your PRs with <span className="text-amber-500">paw-some LGTMs</span>.
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
             Click on an image to copy the GitHub Markdown. Paste it into your pull requests, issues,
@@ -131,11 +132,7 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="border-t mt-20 py-10 bg-white dark:bg-zinc-950">
-        <div className="container mx-auto px-4 text-center text-sm text-zinc-500">
-          <p>Made with ❤️ for paw-some code reviews.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
