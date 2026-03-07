@@ -45,7 +45,7 @@ function Pagination({
           onClick={() => onPage(p)}
           className={`w-9 h-9 rounded-lg text-sm font-semibold transition-colors ${
             p === page
-              ? 'bg-amber-500 text-white shadow'
+              ? 'bg-[#7CBDE2] text-white shadow'
               : 'border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
           }`}
         >
@@ -110,7 +110,7 @@ export default function GalleryPage() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4 gap-4">
           <Link
             href="/"
-            className="flex items-center gap-2 text-2xl font-black bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent shrink-0"
+            className="flex items-center gap-2 text-2xl font-black bg-gradient-to-r from-[#7CBDE2] to-[#5AA7D1] bg-clip-text text-transparent shrink-0"
           >
             LGTM Woof 🐾
           </Link>
@@ -132,7 +132,7 @@ export default function GalleryPage() {
         <aside className="w-full md:w-64 shrink-0">
           <div className="sticky top-24 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/50 p-4 shadow-sm max-h-[calc(100vh-8rem)] overflow-y-auto">
             <h2 className="text-lg font-bold mb-4 text-zinc-900 dark:text-white flex items-center gap-2">
-              <Images className="h-5 w-5 text-amber-500" />
+              <Images className="h-5 w-5 text-[#7CBDE2]" />
               Breeds
             </h2>
             <ul className="space-y-1">
@@ -144,7 +144,7 @@ export default function GalleryPage() {
                   }}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-all ${
                     selectedBreed === null
-                      ? 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200 shadow-sm'
+                      ? 'bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200 shadow-sm'
                       : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                   }`}
                 >
@@ -166,7 +166,7 @@ export default function GalleryPage() {
                       }}
                       className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium capitalize transition-all ${
                         selectedBreed === breed
-                          ? 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200 shadow-sm'
+                          ? 'bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200 shadow-sm'
                           : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                       }`}
                     >
@@ -232,7 +232,7 @@ export default function GalleryPage() {
             <div className="flex flex-col items-center justify-center py-24 gap-4 text-zinc-400">
               <span className="text-6xl">🐾</span>
               <p className="text-lg font-medium">No images yet.</p>
-              <Link href="/" className="text-amber-500 underline text-sm">
+              <Link href="/" className="text-[#7CBDE2] underline text-sm">
                 Go generate some!
               </Link>
             </div>

@@ -49,7 +49,7 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full border-b bg-white/80 dark:bg-zinc-950/80 backdrop-blur">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-black bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+            <span className="text-2xl font-black bg-gradient-to-r from-[#7CBDE2] to-[#5AA7D1] bg-clip-text text-transparent">
               LGTM Woof 🐾
             </span>
           </div>
@@ -75,7 +75,7 @@ export default function Home() {
       <main className="container mx-auto max-w-7xl px-4 py-8">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl text-zinc-900 dark:text-white mb-4">
-            Spice up your PRs with <span className="text-amber-500">paw-some LGTMs</span>.
+            Spice up your PRs with <span className="text-[#7CBDE2]">paw-some LGTMs</span>.
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
             Click on an image to copy the GitHub Markdown. Paste it into your pull requests, issues,
