@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LGTM Woof 🐾
 
-## Getting Started
+A web application for generating "LGTM" dog images to spice up your Pull Requests. Built with a focus on speed, aesthetics, and randomness.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Batch Generation**: Generates 9 unique LGTM dog images in one click.
+- **PIN Protected**: Secure image generation with a server-side PIN system.
+- **Rate Limited**: Integrated "once-per-day" check to prevent excessive image storage.
+- **Dynamic Overlays**: Uses `sharp` and `resvg` to overlay "LGTM" text with random fonts, sizes, and orientations.
+- **Interactive Gallery**: Browse historical images filtered by dog breed.
+- **Quick Copy**: Click any image to instantly copy the GitHub Markdown to your clipboard.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Database / Backend**: [Convex](https://www.convex.dev/)
+- **Image Processing**: [Sharp](https://sharp.pixelplumbing.com/) & [Resvg](https://github.com/yisibl/resvg-js)
+- **Styling**: Tailwind CSS (Project Theme: Soft Blue)
+- **Source**: [Dog CEO API](https://dog.ceo/dog-api/)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Setup
 
-## Learn More
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Configure Environment**:
+   Create a `.env.local` file with:
+   ```bash
+   NEXT_PUBLIC_CONVEX_URL=your_convex_url
+   GENERATE_PIN= # Set your own 4-digit PIN
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Run Convex**:
+   ```bash
+   npx convex dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Launch Dev Server**:
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## 📖 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for personal use and learning. Dog images are provided via the Dog CEO API.

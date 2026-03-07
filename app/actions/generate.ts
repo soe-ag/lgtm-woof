@@ -74,7 +74,19 @@ function buildOverlaySvg(
 }
 
 // ─── Main export ──────────────────────────────────────────────────────────────
-export async function generateLgtmImages() {
+export async function generateLgtmImages(pin: string) {
+  // Verify PIN server-side — the secret never touches the client
+  const correctPin = process.env.GENERATE_PIN
+  if (!correctPin) {
+    return {
+      success: false,
+      error: 'Server is not configured with a PIN. Set GENERATE_PIN in .env.local.',
+    }
+  }
+  if (pin !== correctPin) {
+    return { success: false, error: 'Incorrect PIN. Please try again.' }
+  }
+
   try {
     // 1. Fetch 9 random dog images
     const res = await fetch('https://dog.ceo/api/breeds/image/random/9', { cache: 'no-store' })
@@ -148,6 +160,8 @@ export async function generateLgtmImages() {
     }
 
     await convex.mutation(api.images.saveImages, { images: processedImages })
+    // Record that generation happened today
+    await convex.mutation(api.images.recordGeneration)
     return { success: true, count: processedImages.length }
   } catch (error: unknown) {
     const err = error as Error

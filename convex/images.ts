@@ -72,3 +72,22 @@ export const generateUploadUrl = mutation({
     return await ctx.storage.generateUploadUrl()
   },
 })
+
+// Returns the timestamp of the most recent generation (null if never generated)
+export const getLastGeneratedAt = query({
+  args: {},
+  handler: async (ctx) => {
+    const logs = await ctx.db.query('generationLog').order('desc').take(1)
+    return logs[0]?.generatedAt ?? null
+  },
+})
+
+// Records that a generation happened right now
+export const recordGeneration = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const now = Date.now()
+    const dateKey = new Date(now).toISOString().slice(0, 10) // "YYYY-MM-DD"
+    await ctx.db.insert('generationLog', { generatedAt: now, dateKey })
+  },
+})
