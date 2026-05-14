@@ -5,19 +5,23 @@ A web application for generating "LGTM" dog images to spice up your Pull Request
 ## 🚀 Features
 
 - **Batch Generation**: Generates 9 unique LGTM dog images in one click.
-- **PIN Protected**: Secure image generation with a server-side PIN system.
-- **Rate Limited**: Integrated "once-per-day" check to prevent excessive image storage.
-- **Dynamic Overlays**: Uses `sharp` and `resvg` to overlay "LGTM" text with random fonts, sizes, and orientations.
-- **Interactive Gallery**: Browse historical images filtered by dog breed.
-- **Quick Copy**: Click any image to instantly copy the GitHub Markdown to your clipboard.
+- **PIN Protected**: Secure image generation with a server-side PIN system — the secret never touches the client.
+- **Rate Limited**: "Once-per-day" check prevents excessive storage usage; entering your PIN again overrides the limit.
+- **Dynamic Overlays**: Uses `sharp` and `@resvg/resvg-js` to composite "LGTM" text onto each image with a random font, size, position, angle, and colour. Output is saved as WebP.
+- **Custom Fonts**: Ships 8 hand-picked display fonts (Amatic SC, Bangers, Bungee, Handlee, Pacifico, Patrick Hand, Righteous, Rubik Mono One).
+- **Interactive Gallery**: Browse every generated image at `/gallery`, filtered by dog breed, with paginated results (30 per page).
+- **Quick Copy**: Click any image on the home page or in the gallery to instantly copy the GitHub Markdown to your clipboard.
+- **Dark Mode**: Full light/dark theme support.
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, React Compiler)
 - **Database / Backend**: [Convex](https://www.convex.dev/)
-- **Image Processing**: [Sharp](https://sharp.pixelplumbing.com/) & [Resvg](https://github.com/yisibl/resvg-js)
-- **Styling**: Tailwind CSS (Project Theme: Soft Blue)
-- **Source**: [Dog CEO API](https://dog.ceo/dog-api/)
+- **Image Processing**: [Sharp](https://sharp.pixelplumbing.com/) & [@resvg/resvg-js](https://github.com/yisibl/resvg-js)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/) + [Radix UI](https://www.radix-ui.com/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/)
+- **Dog Images**: [Dog CEO API](https://dog.ceo/dog-api/)
 
 ## ⚙️ Setup
 
@@ -33,15 +37,11 @@ A web application for generating "LGTM" dog images to spice up your Pull Request
    GENERATE_PIN= # Set your own 4-digit PIN
    ```
 
-3. **Run Convex**:
-   ```bash
-   npx convex dev
-   ```
-
-4. **Launch Dev Server**:
+3. **Start the dev server** (runs Next.js and Convex in parallel):
    ```bash
    npm run dev
    ```
+   > `predev` automatically runs `convex dev --until-success` before both servers start, so no separate Convex step is needed.
 
 ## 📖 License
 
